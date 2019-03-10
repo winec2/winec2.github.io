@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tips for Windows on AWS EC2</title>
+  </head>
+  <body>
+    <h1>Launched Windows Server Instance on AWS EC2?</h1>
+    Well, you may need to..<br/>
+    <br/>
+    <hr>
+    <h2>Install Chrome</h2>
+    In Run dialog:
+    <br/>
+    <textarea cols="80" rows="5" style='font-family: monospace; overflow: scroll;'>
+PowerShell -Command "& {$P = $env:TEMP + '\chrome_installer.exe'; Invoke-WebRequest 'https://dl.google.com/chrome/install/latest/chrome_installer.exe' -OutFile $P; Start-Process -FilePath $P -Args '/silent /install' -Verb RunAs -Wait; Remove-Item $P}"
+</textarea><br/>
+    In Powershell (faster because of $ProgressPreference = 'SilentlyContinue'):
+    <br/>
+    <textarea cols="80" rows="5" style='font-family: monospace; overflow: scroll;'>
+$Path = $env:TEMP; $Installer = "chrome_installer.exe"; $ProgressPreference = 'SilentlyContinue'; Invoke-WebRequest "https://dl.google.com/chrome/install/latest/chrome_installer.exe" -OutFile $Path$Installer; Start-Process -FilePath $Path$Installer -Args "/silent /install" -Verb RunAs -Wait; Remove-Item $Path$Installer
+</textarea><br/>
+    <br/>
+    <a href='https://gist.github.com/kurokikaze/350fe1713591641b3b42#gistcomment-2831858' target='_blank'>source 1</a>
+    <a href='https://stackoverflow.com/a/43477248' target='_blank'>source 2</a>
+    <br/>
+    <br/>
+    <hr>
+    <h2>Install Apps</h2>
+    <a href='https://www.7-zip.org/download.html' target='_blank'>7-zip</a><br/>
+    <a href='https://code.visualstudio.com' target='_blank'>Visual Studio Code</a><br/>
+    <a href='https://visualstudio.microsoft.com/downloads/' target='_blank'>Visual Studio</a><br/>
+    <a href='https://notepad-plus-plus.org/download/' target='_blank'>Notepad++</a><br/>
+  </body>
+</html>
