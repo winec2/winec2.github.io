@@ -15,9 +15,13 @@
     <textarea cols="80" rows="5" style='font-family: monospace; overflow: scroll;'>
 PowerShell -Command "& {$P=$env:TEMP+'\chrome_installer.exe';$ProgressPreference='SilentlyContinue';IWR 'https://dl.google.com/chrome/install/latest/chrome_installer.exe' -OutFile $P;SAPS -FilePath $P -Args '/silent /install' -Verb RunAs -Wait;DEL $P}"
 </textarea><br/>
-    <br/>
     <a href='https://gist.github.com/kurokikaze/350fe1713591641b3b42#gistcomment-3950486' target='_blank'>source 1</a>
     <a href='https://stackoverflow.com/a/43477248' target='_blank'>source 2</a>
+    <br/>
+    <h2>Run Edge in incognito mode:</h2>
+    <textarea cols="80" rows="5" style='font-family: monospace; overflow: scroll;'>
+"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -inprivate
+    </textarea><br/>
     <br/>
     <br/>
     <hr>
