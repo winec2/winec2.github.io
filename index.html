@@ -33,6 +33,43 @@ PowerShell -Command "& {$P=$env:TEMP+'\chrome_installer.exe';$ProgressPreference
     <a href='https://dotnet.microsoft.com/download' target='_blank'>Download .NET Framework</a><br/>
     <h2>dotnet options</h2>
     in cmd(admin mode), exec<br/>
-    setx DOTNET_CLI_TELEMETRY_OPTOUT 1<br/>
-  </body>
+<textarea cols="80" rows="5" style='font-family: monospace; overflow: scroll;'>
+setx DOTNET_CLI_TELEMETRY_OPTOUT 1
+</textarea><br/>
+
+
+<h2>EC2 launch user data sample : powershell</h2>
+<textarea cols="120" rows="35" style='font-family: monospace; overflow: scroll;'>
+<powershell>
+
+# Install Chrome
+$P=$env:TEMP+'\chrome_installer.exe';
+$ProgressPreference='SilentlyContinue';
+IWR 'https://dl.google.com/chrome/install/latest/chrome_installer.exe' -OutFile $P;
+SAPS -FilePath $P -Args '/silent /install' -Verb RunAs -Wait;
+DEL $P;
+
+# Create desktop shortcut for Edge INPRIVATE mode
+$wshshell = New-Object -ComObject WScript.Shell;
+$lnk = $wshshell.CreateShortcut($env:PUBLIC + "\Desktop\EDGE-INPRIVATE.lnk");
+$lnk.WorkingDirectory = "C:\Program Files (x86)\Microsoft\Edge\Application";
+$lnk.TargetPath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe";
+$lnk.Arguments = "-inprivate";
+$lnk.Save();
+
+# Create desktop shortcut for Chrome INCOGNITO mode
+$wshshell = New-Object -ComObject WScript.Shell;
+$lnk = $wshshell.CreateShortcut($env:PUBLIC + "\Desktop\CHROME-INCOGNITO.lnk");
+$lnk.WorkingDirectory = "C:\Program Files\Google\Chrome\Application";
+$lnk.TargetPath = "C:\Program Files\Google\Chrome\Application\chrome.exe";
+$lnk.Arguments = "-incognito";
+$lnk.Save();
+
+# OPTIONAL : remove comment to change administrator password to "Insecure-Password"
+# $AdminPassword = ConvertTo-SecureString "Insecure-Password" -AsPlainText -Force
+# Set-LocalUser -Name Administrator -Password $AdminPassword;
+
+</powershell>
+</textarea><br/>
+</body>
 </html>
